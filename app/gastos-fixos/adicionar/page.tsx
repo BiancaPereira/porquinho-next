@@ -1,8 +1,7 @@
 "use client";
 
-import { z } from "zod";
-import { useForm } from "react-hook-form";
-import { zodResolver } from "@hookform/resolvers/zod";
+import { CategoriasModal } from "@/components/CategoriasModal";
+import { Button } from "@/components/ui/button";
 import {
   Form,
   FormControl,
@@ -12,19 +11,7 @@ import {
   FormLabel,
   FormMessage,
 } from "@/components/ui/form";
-import { format } from "date-fns";
-import { Button } from "@/components/ui/button";
-import { toast } from "sonner";
 import { Input } from "@/components/ui/input";
-import {
-  Popover,
-  PopoverContent,
-  PopoverTrigger,
-} from "@/components/ui/popover";
-import { CalendarIcon } from "lucide-react";
-import { Calendar } from "@/components/ui/calendar";
-import { cn } from "@/lib/utils";
-import { Switch } from "@/components/ui/switch";
 import {
   Select,
   SelectContent,
@@ -32,13 +19,18 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { useEffect } from "react";
-import { CategoriasModal } from "@/components/CategoriasModal";
+import { Switch } from "@/components/ui/switch";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { format } from "date-fns";
 import { useRouter, useSearchParams } from "next/navigation";
+import { useEffect } from "react";
+import { useForm } from "react-hook-form";
+import { toast } from "sonner";
+import { z } from "zod";
 
 const FormSchema = z.object({
   valor: z.preprocess(
-    (val) => parseFloat(val as string),
+    (val) => (typeof val === "string" ? parseFloat(val) : val),
     z.number().positive()
   ),
   info: z.string().optional(),
@@ -53,7 +45,7 @@ export default function Page() {
   const searchParams = useSearchParams();
   const id = searchParams.get("id");
 
-  const form = useForm<z.infer<typeof FormSchema>>({
+  const form = useForm({
     resolver: zodResolver(FormSchema),
     mode: "onBlur",
     defaultValues: {
@@ -70,6 +62,7 @@ export default function Page() {
     if (id) {
       getGastoFixoById(id);
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [id]);
 
   function getGastoFixoById(id: string) {
@@ -208,6 +201,7 @@ export default function Page() {
                 <FormControl>
                   <Input
                     {...field}
+                    value={field.value as string | number}
                     type="number"
                     className="input"
                     placeholder="Digite o valor"
