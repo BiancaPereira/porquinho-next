@@ -18,7 +18,6 @@ export default function RootLayout({
     <html lang="pt-br">
       <body className={inter.className}>
         <Suspense fallback={<div>Carregando...</div>}>{children}</Suspense>
-        );
       </body>
     </html>
   );
