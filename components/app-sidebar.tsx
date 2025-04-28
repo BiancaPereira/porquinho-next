@@ -15,7 +15,7 @@ const data = {
     },
     {
       title: "Gastos",
-      url: "gastos",
+      url: "",
       icon: CircleDollarSign,
       items: [
         {
@@ -30,7 +30,7 @@ const data = {
     },
     {
       title: "Cartões de crédito",
-      url: "cartoes",
+      url: "",
       icon: CreditCard,
       items: [
         {
