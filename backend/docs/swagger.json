@@ -1,0 +1,68 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+      "title": "Porquinho API",
+      "version": "1.0.0",
+      "description": "Documentação da API de ganhos"
+    },
+    "servers": [
+      {
+        "url": "http://localhost:3333/api"
+      }
+    ],
+    "paths": {
+      "/ganhos": {
+        "get": {
+          "summary": "Listar ganhos",
+          "responses": {
+            "200": {
+              "description": "Lista de ganhos"
+            }
+          }
+        },
+        "post": {
+          "summary": "Criar ganho",
+          "requestBody": {
+            "required": true,
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Ganho"
+                }
+              }
+            }
+          },
+          "responses": {
+            "201": {
+              "description": "Ganho criado"
+            }
+          }
+        }
+      },
+      "/ganhos/counter": {
+        "get": {
+          "summary": "Resumo dos ganhos",
+          "responses": {
+            "200": {
+              "description": "Dados agregados"
+            }
+          }
+        }
+      }
+    },
+    "components": {
+      "schemas": {
+        "Ganho": {
+          "type": "object",
+          "properties": {
+            "tipo": { "type": "string" },
+            "dono": { "type": "string" },
+            "valor": { "type": "number" },
+            "data": { "type": "string", "format": "date" },
+            "info": { "type": "string" }
+          },
+          "required": ["tipo", "dono", "valor", "data"]
+        }
+      }
+    }
+}
