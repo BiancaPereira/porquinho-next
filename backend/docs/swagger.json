@@ -48,7 +48,150 @@
             }
           }
         }
+      },
+    "/gastos/fixos": {
+  "get": {
+    "summary": "Listar todos os gastos fixos",
+    "tags": ["Gastos"],
+    "responses": {
+      "200": {
+        "description": "Lista de gastos fixos",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "array",
+              "items": { "$ref": "#/components/schemas/GastoFixo" }
+            }
+          }
+        }
       }
+    }
+  },
+  "post": {
+    "summary": "Criar um gasto fixo",
+    "tags": ["Gastos"],
+    "requestBody": {
+      "required": true,
+      "content": {
+        "application/json": {
+          "schema": { "$ref": "#/components/schemas/GastoFixo" }
+        }
+      }
+    },
+    "responses": {
+      "201": {
+        "description": "Gasto fixo criado com sucesso",
+        "content": {
+          "application/json": {
+            "schema": { "$ref": "#/components/schemas/GastoFixo" }
+          }
+        }
+      }
+    }
+  }
+},
+"/gastos/fixos/{id}": {
+  "get": {
+    "summary": "Obter gasto fixo por ID",
+    "tags": ["Gastos"],
+    "parameters": [
+      {
+        "name": "id",
+        "in": "path",
+        "required": true,
+        "schema": { "type": "integer" }
+      }
+    ],
+    "responses": {
+      "200": {
+        "description": "Gasto fixo encontrado",
+        "content": {
+          "application/json": {
+            "schema": { "$ref": "#/components/schemas/GastoFixo" }
+          }
+        }
+      },
+      "404": {
+        "description": "Gasto não encontrado"
+      }
+    }
+  },
+  "put": {
+    "summary": "Atualizar gasto fixo por ID",
+    "tags": ["Gastos"],
+    "parameters": [
+      {
+        "name": "id",
+        "in": "path",
+        "required": true,
+        "schema": { "type": "integer" }
+      }
+    ],
+    "requestBody": {
+      "required": true,
+      "content": {
+        "application/json": {
+          "schema": { "$ref": "#/components/schemas/GastoFixo" }
+        }
+      }
+    },
+    "responses": {
+      "200": {
+        "description": "Gasto atualizado com sucesso",
+        "content": {
+          "application/json": {
+            "schema": { "$ref": "#/components/schemas/GastoFixo" }
+          }
+        }
+      },
+      "404": {
+        "description": "Gasto não encontrado"
+      }
+    }
+  }
+},
+"/gastos/a_vista": {
+  "get": {
+    "summary": "Listar gastos à vista",
+    "tags": ["Gastos"],
+    "responses": {
+      "200": {
+        "description": "Lista de gastos à vista",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "array",
+              "items": { "$ref": "#/components/schemas/GastoAVista" }
+            }
+          }
+        }
+      }
+    }
+  },
+  "post": {
+    "summary": "Criar gasto à vista",
+    "tags": ["Gastos"],
+    "requestBody": {
+      "required": true,
+      "content": {
+        "application/json": {
+          "schema": { "$ref": "#/components/schemas/GastoAVista" }
+        }
+      }
+    },
+    "responses": {
+      "201": {
+        "description": "Gasto criado com sucesso",
+        "content": {
+          "application/json": {
+            "schema": { "$ref": "#/components/schemas/GastoAVista" }
+          }
+        }
+      }
+    }
+  }
+}
+
     },
     "components": {
       "schemas": {
@@ -62,7 +205,40 @@
             "info": { "type": "string" }
           },
           "required": ["tipo", "dono", "valor", "data"]
-        }
+        },
+        "GastoFixo": {
+  "type": "object",
+  "properties": {
+    "id": { "type": "integer", "example": 1 },
+    "descricao": { "type": "string", "example": "Aluguel" },
+    "valor": { "type": "number", "example": 1200.0 },
+    "a_vista": { "type": "boolean", "example": false },
+    "data_inicio": { "type": "string", "format": "date", "example": "2024-01-01" },
+    "data_fim": { "type": "string", "format": "date", "nullable": true },
+    "ativo": { "type": "boolean", "example": true },
+    "categoria": {
+      "type": "string",
+      "enum": ["ESSENCIAL", "OPCIONAL", "DIVERSAO", "EXTRAS"]
+    },
+    "info": { "type": "string", "nullable": true },
+    "atualizado_em": { "type": "string", "format": "date", "nullable": true }
+  }
+},
+"GastoAVista": {
+  "type": "object",
+  "properties": {
+    "id": { "type": "integer", "example": 1 },
+    "descricao": { "type": "string", "example": "Compra no mercado" },
+    "valor": { "type": "number", "example": 200.0 },
+    "data": { "type": "string", "format": "date", "example": "2024-04-20" },
+    "categoria": {
+      "type": "string",
+      "enum": ["ESSENCIAL", "OPCIONAL", "DIVERSAO", "EXTRAS"]
+    },
+    "info": { "type": "string", "nullable": true }
+  }
+}
+
       }
     }
 }
