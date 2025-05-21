@@ -1,4 +1,4 @@
-import { TipoGanhos, Responsavel } from '../enums/ganhos_enum';
+import { TipoGanhos, Responsavel } from '../enums/enum';
 
 export interface Ganho {
   id: number;
