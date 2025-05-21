@@ -9,3 +9,4 @@ export enum TipoGanhos {
     GIL = "GIL",
   }
   
+export type CategoriaGastos = 'ESSENCIAL' | 'OPCIONAL' | 'DIVERSAO' | 'EXTRAS';

@@ -1,10 +1,11 @@
 import { DataTable } from "./data-table";
 import { columns } from "./columns";
+import { environment } from "@/environments/environments";
 
 export default async function Page() {
   let gastos = [];
   try {
-    const gastosData = await fetch(`${process.env.API_BASE_URL}/gastos/fixos`);
+    const gastosData = await fetch(`${environment.apiBaseUrl}/gastos/fixos`);
     gastos = await gastosData.json();
   } catch (error) {
     console.error("Failed to fetch gastos fixos:", error);

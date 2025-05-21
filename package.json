@@ -3,9 +3,9 @@
   "version": "0.2.0",
   "private": true,
   "scripts": {
-  "dev": "next dev",
-  "dev:api": "ts-node -P tsconfig.backend.json backend/index.ts",
-  "dev:all": "concurrently \"npm run dev\" \"npm run dev:api\""
+    "dev": "next dev",
+    "dev:api": "ts-node -P tsconfig.backend.json backend/index.ts",
+    "dev:all": "concurrently \"npm run dev\" \"npm run dev:api\""
   },
   "dependencies": {
     "@hookform/resolvers": "^5.0.1",
@@ -26,6 +26,7 @@
     "autoprefixer": "10.4.20",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
+    "cors": "^2.8.5",
     "date-fns": "^2.30.0",
     "eslint": "8.41.0",
     "eslint-config-next": "13.4.4",
@@ -46,6 +47,7 @@
     "zod": "^3.24.2"
   },
   "devDependencies": {
+    "@types/cors": "^2.8.18",
     "@types/express": "^5.0.1",
     "@types/swagger-ui-express": "^4.1.8",
     "concurrently": "^9.1.2",
