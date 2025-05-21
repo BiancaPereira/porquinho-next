@@ -1,5 +1,5 @@
 import { z } from 'zod';
-import { TipoGanhos, Responsavel } from '../enums/ganhos_enum';
+import { TipoGanhos, Responsavel } from '../enums/enum';
 
 // Criação de ganho
 export const GanhoCreateSchema = z.object({

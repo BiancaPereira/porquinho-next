@@ -1,12 +1,20 @@
+import cors from 'cors';
 import express from 'express';
-import router from './routes/ganhos_routes';
+import ganhosRouter from './routes/ganhos_routes';
 import swaggerUi from 'swagger-ui-express';
 import swaggerDocument from './docs/swagger.json'; // ajuste o caminho conforme necessário
+import gastosRouter from './routes/gastos_routes';
 
 const app = express();
+
+app.use(cors({
+  origin: 'http://localhost:3000'
+}));
+
 app.use(express.json());
 
-app.use('/api', router);
+app.use('/api/ganhos', ganhosRouter);
+app.use('/api/gastos', gastosRouter);
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
 const PORT = process.env.PORT || 3333;
