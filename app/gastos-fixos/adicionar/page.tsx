@@ -27,6 +27,7 @@ import { useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { toast } from "sonner";
 import { z } from "zod";
+import { environment } from "@/environments/environments";
 
 const FormSchema = z.object({
   valor: z.preprocess(
@@ -67,7 +68,7 @@ export default function Page() {
 
   function getGastoFixoById(id: string) {
     try {
-      fetch(`${process.env.API_BASE_URL}/gastos/fixos/${id}`)
+      fetch(`${environment.apiBaseUrl}/gastos/fixos/${id}`)
         .then((res) => res.json())
         .then((data) => {
           form.reset(data);
@@ -89,7 +90,7 @@ export default function Page() {
     try {
       if (id) {
         // Update existing record
-        await fetch(`${process.env.API_BASE_URL}/gastos/fixos/${id}`, {
+        await fetch(`${environment.apiBaseUrl}/gastos/fixos/${id}`, {
           method: "PUT",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify(formattedData),
@@ -97,7 +98,7 @@ export default function Page() {
         toast.success("Gasto fixo atualizado com sucesso!");
       } else {
         // Create new record
-        await fetch(`${process.env.API_BASE_URL}/gastos/fixos`, {
+        await fetch(`${environment.apiBaseUrl}/gastos/fixos`, {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify(formattedData),
